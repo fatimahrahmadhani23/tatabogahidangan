@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Tata Boga - SMALB Fase E</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Sans-serif ramah tuna rungu -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F3F8FF;
+            color: #2D3748;
+            font-size: 18px; /* Standardized min size for clarity */
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        /* Large Touch Targets for Special Education */
+        .btn-large {
+            min-height: 52px;
+            min-width: 52px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* High Contrast Focus States & Transitions */
+        .card-interactive {
+            transition: all 0.2s ease-in-out;
+            border: 3px solid #E2E8F0;
+        }
+        .card-interactive:hover, .card-interactive:focus {
+            transform: translateY(-4px);
+            border-color: #3B82F6;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Visual Active Indicators */
+        .nav-link.active {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            font-weight: 800;
+            border-bottom: 4px solid #1E40AF;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E2E8F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94A3B8;
+            border-radius: 5px;
+        }
+
+        /* Visual Pulse Animation for Attention */
+        @keyframes subtle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-bounce-subtle {
+            animation: subtle-bounce 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-blue-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Bar / Header Configuration -->
+    <header class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-2 rounded-2xl text-amber-600 text-2xl shadow">
+                    🍌
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold leading-tight">TATA BOGA FASE E</h1>
+                    <p class="text-xs md:text-sm text-amber-100 font-semibold">SMALB Tunarungu • Hidangan Sederhana Berbahan Tepung</p>
+                </div>
+            </div>
+
+            <!-- Global Score Badge -->
+            <div class="flex items-center gap-2 bg-amber-700/60 px-4 py-1.5 rounded-full border border-amber-300/40 text-sm font-bold">
+                <span>🏆 SKOR SAYA:</span>
+                <span id="global-score" class="text-yellow-300 text-lg font-black">0</span>
+            </div>
+        </div>
+
+        <!-- Scrollable Navigation Tabs -->
+        <nav class="bg-blue-900 text-white overflow-x-auto whitespace-nowrap shadow-inner scrollbar-thin">
+            <div class="max-w-7xl mx-auto px-2 flex space-x-1 py-1 text-sm md:text-base font-bold">
+                <button onclick="switchTab('beranda')" id="tab-beranda" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800 active">
+                    🏠 <span>Beranda</span>
+                </button>
+                <button onclick="switchTab('tujuan')" id="tab-tujuan" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🎯 <span>Tujuan</span>
+                </button>
+                <button onclick="switchTab('bahan')" id="tab-bahan" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🥣 <span>Bahan</span>
+                </button>
+                <button onclick="switchTab('alat')" id="tab-alat" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🍳 <span>Alat</span>
+                </button>
+                <button onclick="switchTab('langkah')" id="tab-langkah" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🧑‍🍳 <span>Langkah</span>
+                </button>
+                <button onclick="switchTab('video')" id="tab-video" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🎥 <span>Video</span>
+                </button>
+                <button onclick="switchTab('k3')" id="tab-k3" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🦺 <span>Kebersihan & K3</span>
+                </button>
+                <button onclick="switchTab('game-pasang')" id="tab-game-pasang" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🎮 <span>Game Pasangkan</span>
+                </button>
+                <button onclick="switchTab('game-urutan')" id="tab-game-urutan" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    🧩 <span>Game Urutan</span>
+                </button>
+                <button onclick="switchTab('latihan')" id="tab-latihan" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    📝 <span>Latihan Soal</span>
+                </button>
+                <button onclick="switchTab('lkpd')" id="tab-lkpd" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    📋 <span>LKPD Digital</span>
+                </button>
+                <button onclick="switchTab('penilaian')" id="tab-penilaian" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800">
+                    📊 <span>Rubrik Guru</span>
+                </button>
+                <button onclick="switchTab('pengaturan')" id="tab-pengaturan" class="nav-link px-4 py-2.5 rounded-lg flex items-center gap-2 transition hover:bg-blue-800 bg-amber-700">
+                    ⚙️ <span>Link Dokumen</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- 1. BERANDA / HOME -->
+        <section id="sec-beranda" class="tab-content block">
+            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-amber-300 text-center relative overflow-hidden">
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full font-bold text-sm mb-4">
+                    Keterampilan Pilihan Tata Boga – Fase E SMALB
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black text-amber-600 mb-4 tracking-tight">
+                    BELAJAR MEMBUAT HIDANGAN SEDERHANA BERBAHAN TEPUNG
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-700 font-bold max-w-3xl mx-auto mb-8 leading-relaxed">
+                    "Membuat Pisang Goreng Tepung yang Renyah dan Lezat 🍌✨"
+                </p>
+
+                <!-- Visual Banner -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                    <div class="bg-amber-50 p-6 rounded-2xl border-2 border-amber-200 flex flex-col items-center">
+                        <span class="text-6xl mb-3">🍌</span>
+                        <h3 class="font-bold text-xl text-amber-900">Bahan Utama</h3>
+                        <p class="text-sm text-slate-600 font-medium">Pisang segar pilihan</p>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-2xl border-2 border-orange-200 flex flex-col items-center">
+                        <span class="text-6xl mb-3">🥣</span>
+                        <h3 class="font-bold text-xl text-orange-900">Adonan Tepung</h3>
+                        <p class="text-sm text-slate-600 font-medium">Campuran manis & gurih</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-2xl border-2 border-yellow-200 flex flex-col items-center">
+                        <span class="text-6xl mb-3">🍳</span>
+                        <h3 class="font-bold text-xl text-yellow-900">Goreng Matang</h3>
+                        <p class="text-sm text-slate-600 font-medium">Siap disajikan hangat</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border-2 border-blue-300 p-6 rounded-2xl my-6 text-left">
+                    <h3 class="font-bold text-lg text-blue-900 mb-2 flex items-center gap-2">
+                        <span>💡</span>
+                        <span>Petunjuk Belajar untuk Siswa:</span>
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 font-semibold text-base">
+                        <li>Klik menu navigasi di atas untuk memilih pelajaran.</li>
+                        <li>Perhatikan gambar dan teks pendek dengan teliti.</li>
+                        <li>Ikuti permainan dan latihan untuk mengumpulkan skor!</li>
+                    </ul>
+                </div>
+
+                <button onclick="switchTab('tujuan')" class="btn-large bg-amber-500 hover:bg-amber-600 text-white text-xl px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105 active:scale-95 inline-flex items-center gap-3">
+                    <span>MULAI BELAJAR</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. TUJUAN PEMBELAJARAN -->
+        <section id="sec-tujuan" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-blue-300">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">🎯</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-blue-900">TUJUAN PEMBELAJARAN</h2>
+                        <p class="text-slate-500 text-sm">Target kemampuan siswa setelah belajar</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-emerald-50 p-5 rounded-2xl border-2 border-emerald-200 flex items-start gap-4">
+                        <span class="text-3xl bg-emerald-200 p-2 rounded-xl">1️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-emerald-900 text-lg">Mengenal Bahan</h3>
+                            <p class="text-slate-700 text-sm font-medium">Siswa mampu menyebutkan dan menunjukkan bahan-bahan membuat pisang goreng.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cyan-50 p-5 rounded-2xl border-2 border-cyan-200 flex items-start gap-4">
+                        <span class="text-3xl bg-cyan-200 p-2 rounded-xl">2️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-cyan-900 text-lg">Mengenal Alat</h3>
+                            <p class="text-slate-700 text-sm font-medium">Siswa mampu menyebutkan dan fungsi alat pengolahan dapur sederhana.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 p-5 rounded-2xl border-2 border-amber-200 flex items-start gap-4">
+                        <span class="text-3xl bg-amber-200 p-2 rounded-xl">3️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-amber-900 text-lg">Mengurutkan Langkah</h3>
+                            <p class="text-slate-700 text-sm font-medium">Siswa mampu menyusun urutan langkah pembuatan pisang goreng secara runtut.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-5 rounded-2xl border-2 border-purple-200 flex items-start gap-4">
+                        <span class="text-3xl bg-purple-200 p-2 rounded-xl">4️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-purple-900 text-lg">Mempraktikkan Memasak</h3>
+                            <p class="text-slate-700 text-sm font-medium">Siswa mampu membuat pisang goreng tepung dengan bimbingan guru.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-rose-50 p-5 rounded-2xl border-2 border-rose-200 flex items-start gap-4">
+                        <span class="text-3xl bg-rose-200 p-2 rounded-xl">5️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-rose-900 text-lg">Menerapkan K3</h3>
+                            <p class="text-slate-700 text-sm font-medium">Siswa menjaga kebersihan diri, alat, dan keselamatan kerja dapur.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-5 rounded-2xl border-2 border-indigo-200 flex items-start gap-4">
+                        <span class="text-3xl bg-indigo-200 p-2 rounded-xl">6️⃣</span>
+                        <div>
+                            <h3 class="font-bold text-indigo-900 text-lg">Sikap Positif</h3>
+                            <p class="text-slate-700 text-sm font-medium">Menunjukkan sikap disiplin, mandiri, kerja sama, dan tanggung jawab.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="switchTab('bahan')" class="btn-large bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                        <span>Lanjut ke Mengenal Bahan</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MENGENAL BAHAN -->
+        <section id="sec-bahan" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-amber-300">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">🥣</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-amber-900">MENGENAL BAHAN</h2>
+                        <p class="text-slate-500 text-sm">Klik pada kartu bahan untuk melihat penjelasan lengkapnya!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="container-bahan">
+                    <!-- Dynamic Ingredient Cards generated via JavaScript -->
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="switchTab('tujuan')" class="btn-large bg-slate-200 hover:bg-slate-300 text-slate-800 px-6 py-3 rounded-xl font-bold">
+                        ⬅️ Kembali
+                    </button>
+                    <button onclick="switchTab('alat')" class="btn-large bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                        <span>Mengenal Alat</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MENGENAL ALAT -->
+        <section id="sec-alat" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-cyan-300">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">🍳</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-cyan-900">MENGENAL ALAT DAPUR</h2>
+                        <p class="text-slate-500 text-sm">Klik alat di bawah ini untuk belajar fungsi dan cara aman!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="container-alat">
+                    <!-- Dynamic Tool Cards generated via JavaScript -->
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="switchTab('bahan')" class="btn-large bg-slate-200 hover:bg-slate-300 text-slate-800 px-6 py-3 rounded-xl font-bold">
+                        ⬅️ Kembali
+                    </button>
+                    <button onclick="switchTab('langkah')" class="btn-large bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                        <span>Langkah Pembuatan</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. LANGKAH PEMBUATAN (STEP BY STEP) -->
+        <section id="sec-langkah" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-emerald-300">
+                <div class="flex items-center justify-between mb-4 border-b-2 border-slate-100 pb-4 flex-wrap gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">🧑‍🍳</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-emerald-900">LANGKAH PEMBUATAN</h2>
+                            <p class="text-slate-500 text-sm">Pelajari cara membuat pisang goreng step by step</p>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-2xl font-bold text-lg border border-emerald-300">
+                        <span id="step-indicator">Langkah 1 dari 10</span>
+                    </div>
+                </div>
+
+                <!-- Visual Step Display Card -->
+                <div class="bg-gradient-to-b from-emerald-50 to-white rounded-3xl p-6 md:p-10 border-2 border-emerald-200 text-center min-h-[380px] flex flex-col justify-between shadow-inner">
+                    <div class="space-y-4">
+                        <div class="inline-block bg-emerald-600 text-white px-6 py-2 rounded-full font-black text-xl shadow-md" id="step-badge">
+                            LANGKAH 1
+                        </div>
+                        <div class="text-8xl py-4" id="step-icon">
+                            🍌
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800 max-w-xl mx-auto leading-relaxed" id="step-text">
+                            Siapkan pisang segar.
+                        </h3>
+                    </div>
+
+                    <!-- Step Guidance Box for Deaf Students -->
+                    <div class="bg-amber-100 border-2 border-amber-300 p-4 rounded-2xl text-amber-900 font-bold text-base mt-6 text-left flex items-center gap-3">
+                        <span class="text-3xl">⚠️</span>
+                        <span id="step-safety-note">Gunakan bahan pisang yang sudah matang dan manis.</span>
+                    </div>
+                </div>
+
+                <!-- Step Control Buttons -->
+                <div class="mt-8 flex justify-between items-center gap-4">
+                    <button onclick="prevStep()" id="btn-prev-step" class="btn-large bg-slate-300 hover:bg-slate-400 text-slate-800 px-6 py-3 rounded-2xl font-bold text-lg disabled:opacity-40">
+                        ⬅️ Langkah Sebelumnya
+                    </button>
+                    <button onclick="nextStep()" id="btn-next-step" class="btn-large bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-2xl font-bold text-lg shadow-lg">
+                        Langkah Berikutnya ➡️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIDEO DEMONSTRASI -->
+        <section id="sec-video" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-red-300">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">🎥</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-red-900">VIDEO DEMONSTRASI GURU</h2>
+                        <p class="text-slate-500 text-sm">Saksikan video peragaan membuat pisang goreng tepung dengan caption/subtitle</p>
+                    </div>
+                </div>
+
+                <!-- Video Frame Area -->
+                <div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 shadow-2xl relative border-4 border-slate-200">
+                    <iframe id="youtube-iframe" class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Pembelajaran Tata Boga" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- Caption & Visual Note -->
+                <div class="mt-6 bg-blue-50 border-2 border-blue-200 p-4 rounded-2xl flex items-center gap-3">
+                    <span class="text-3xl">🧏‍♂️</span>
+                    <p class="text-slate-700 text-sm font-bold">
+                        Catatan untuk Siswa Tunarungu: Perhatikan visual tangan guru saat mengupas pisang, mengaduk adonan, dan menggoreng. Nyalakan Subtitle (CC) jika tersedia pada video.
+                    </p>
+                </div>
+
+                <!-- Teacher Link Config Box -->
+                <div class="mt-6 bg-slate-100 p-4 rounded-2xl border border-slate-300">
+                    <label class="block font-bold text-sm text-slate-700 mb-1">⚙️ Pengaturan Guru (Ganti URL Video YouTube):</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="input-yt-url" placeholder="Masukkan Link Embed YouTube atau ID Video" class="flex-grow p-2.5 rounded-xl border border-slate-300 text-sm font-medium">
+                        <button onclick="updateYouTubeUrl()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold text-sm">
+                            Simpan Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. KESELAMATAN & KEBERSIHAN (K3) -->
+        <section id="sec-k3" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-teal-300">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">🦺</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-teal-900">KESELAMATAN & KEBERSIHAN (K3)</h2>
+                        <p class="text-slate-500 text-sm">Aturan penting sebelum dan saat memasak di dapur sekolah</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-teal-50 p-5 rounded-2xl border-2 border-teal-200 text-center">
+                        <span class="text-6xl block mb-2">🧼</span>
+                        <h3 class="font-bold text-teal-900 text-xl mb-1">Cuci Tangan</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Cuci tangan pakai sabun dan air mengalir sebelum memegang bahan makanan.</p>
+                    </div>
+
+                    <div class="bg-teal-50 p-5 rounded-2xl border-2 border-teal-200 text-center">
+                        <span class="text-6xl block mb-2">🎽</span>
+                        <h3 class="font-bold text-teal-900 text-xl mb-1">Pakai Celemek</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Gunakan celemek dan ikat rambut rapi agar baju tetap bersih.</p>
+                    </div>
+
+                    <div class="bg-amber-50 p-5 rounded-2xl border-2 border-amber-300 text-center">
+                        <span class="text-6xl block mb-2">🔪</span>
+                        <h3 class="font-bold text-amber-900 text-xl mb-1">Hati-Hati Pisau</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Pegang pisau dengan benar. Fokus saat memotong buah pisang.</p>
+                    </div>
+
+                    <div class="bg-rose-50 p-5 rounded-2xl border-2 border-rose-300 text-center">
+                        <span class="text-6xl block mb-2">🔥</span>
+                        <h3 class="font-bold text-rose-900 text-xl mb-1">Hati-Hati Api & Minyak</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Minyak panas dan kompor berbahaya. Minta bantuan guru saat menggoreng!</p>
+                    </div>
+
+                    <div class="bg-teal-50 p-5 rounded-2xl border-2 border-teal-200 text-center">
+                        <span class="text-6xl block mb-2">🧹</span>
+                        <h3 class="font-bold text-teal-900 text-xl mb-1">Bersihkan Meja</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Lap meja dapur hingga bersih dan kering setelah selesai memasak.</p>
+                    </div>
+
+                    <div class="bg-teal-50 p-5 rounded-2xl border-2 border-teal-200 text-center">
+                        <span class="text-6xl block mb-2">🧽</span>
+                        <h3 class="font-bold text-teal-900 text-xl mb-1">Cuci Alat Dapur</h3>
+                        <p class="text-sm text-slate-700 font-semibold">Cuci wajan, mangkuk, dan sendok sampai bersih lalu keringkan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. PERMAINAN INTERAKTIF (AYO PASANGKAN) -->
+        <section id="sec-game-pasang" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-indigo-300">
+                <div class="flex items-center justify-between mb-6 border-b-2 border-slate-100 pb-4 flex-wrap gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">🎮</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-indigo-900">GAME: AYO PASANGKAN!</h2>
+                            <p class="text-slate-500 text-sm">Pilih gambar di sebelah kiri, lalu pilih nama/fungsi yang cocok di sebelah kanan!</p>
+                        </div>
+                    </div>
+                    <button onclick="resetMatchGame()" class="bg-indigo-100 text-indigo-700 hover:bg-indigo-200 px-4 py-2 rounded-xl font-bold text-sm">
+                        🔄 Main Lagi
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="match-game-area">
+                    <!-- Left Items -->
+                    <div class="space-y-3" id="match-left">
+                        <h3 class="font-bold text-lg text-indigo-900 mb-2 border-b pb-1">1. Pilih Gambar Item:</h3>
+                        <!-- Rendered by JS -->
+                    </div>
+                    <!-- Right Target Definitions -->
+                    <div class="space-y-3" id="match-right">
+                        <h3 class="font-bold text-lg text-indigo-900 mb-2 border-b pb-1">2. Pilih Pasangan Cocok:</h3>
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <div id="match-game-feedback" class="mt-6 p-4 rounded-2xl text-center font-bold text-lg hidden"></div>
+            </div>
+        </section>
+
+        <!-- 9. MENGURUTKAN LANGKAH -->
+        <section id="sec-game-urutan" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-purple-300">
+                <div class="flex items-center justify-between mb-6 border-b-2 border-slate-100 pb-4 flex-wrap gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">🧩</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-purple-900">URUTKAN LANGKAH MEMASAK</h2>
+                            <p class="text-slate-500 text-sm">Klik langkah-langkah di bawah sesuai urutan dari awal sampai akhir!</p>
+                        </div>
+                    </div>
+                    <button onclick="resetOrderGame()" class="bg-purple-100 text-purple-700 hover:bg-purple-200 px-4 py-2 rounded-xl font-bold text-sm">
+                        🔄 Ulangi Game
+                    </button>
+                </div>
+
+                <!-- Step selection pool -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-slate-700 mb-2">Pilihan Langkah Acak (Klik untuk memilih):</h3>
+                    <div class="flex flex-wrap gap-2" id="order-pool">
+                        <!-- JS items -->
+                    </div>
+                </div>
+
+                <!-- User chosen sequence -->
+                <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300 min-h-[160px] mb-6">
+                    <h3 class="font-bold text-purple-900 mb-2">Urutan Pilihan Kamu:</h3>
+                    <ol class="list-decimal list-inside space-y-2 font-bold text-slate-800" id="order-user-list">
+                        <!-- User selections appear here -->
+                    </ol>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <button onclick="checkStepOrdering()" class="btn-large bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-2xl font-bold text-lg shadow-md">
+                        ✅ CEK URUTAN SAYA
+                    </button>
+                    <div id="order-feedback" class="font-bold text-lg"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. LATIHAN SOAL PILIHAN GANDA -->
+        <section id="sec-latihan" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-orange-300">
+                <div class="flex items-center justify-between mb-6 border-b-2 border-slate-100 pb-4 flex-wrap gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">📝</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-orange-900">LATIHAN SOAL (10 SOAL)</h2>
+                            <p class="text-slate-500 text-sm">Jawablah pertanyaan dengan memilih jawaban A, B, atau C!</p>
+                        </div>
+                    </div>
+                    <div class="bg-orange-100 text-orange-800 px-4 py-2 rounded-2xl font-bold">
+                        <span id="quiz-progress-text">Soal 1 dari 10</span>
+                    </div>
+                </div>
+
+                <div id="quiz-card" class="bg-orange-50/60 p-6 rounded-3xl border-2 border-orange-200 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <span class="text-5xl" id="quiz-emoji">🍌</span>
+                        <h3 class="text-xl md:text-2xl font-black text-slate-800" id="quiz-question-text">
+                            1. Bahan utama yang digunakan untuk membuat pisang goreng adalah...
+                        </h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3" id="quiz-options-container">
+                        <!-- Option buttons rendered by JS -->
+                    </div>
+
+                    <div id="quiz-explanation" class="hidden p-4 rounded-2xl font-bold text-base"></div>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="prevQuizQuestion()" id="btn-quiz-prev" class="bg-slate-200 hover:bg-slate-300 px-6 py-3 rounded-xl font-bold text-slate-700 disabled:opacity-40">
+                        ⬅️ Soal Lalu
+                    </button>
+                    <button onclick="nextQuizQuestion()" id="btn-quiz-next" class="btn-large bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-xl font-bold">
+                        Soal Berikutnya ➡️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. LKPD DIGITAL -->
+        <section id="sec-lkpd" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-blue-400">
+                <div class="flex items-center justify-between mb-6 border-b-2 border-slate-100 pb-4 flex-wrap gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">📋</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-blue-900">LKPD DIGITAL SISWA</h2>
+                            <p class="text-slate-500 text-sm">Lembar Kerja Peserta Didik Tata Boga - Fase E SMALB</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openGoogleDocs()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow">
+                            📄 Buka Google Docs
+                        </button>
+                        <button onclick="openWordFile()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow">
+                            📘 Buka File Word
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Student Identity Form -->
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block font-bold text-sm text-blue-900 mb-1">Nama Siswa:</label>
+                        <input type="text" id="lkpd-nama" placeholder="Tulis nama kamu..." class="w-full p-3 rounded-xl border border-blue-300 font-bold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-sm text-blue-900 mb-1">Kelas / Jenis Ketunaan:</label>
+                        <input type="text" id="lkpd-kelas" value="SMALB Fase E - Tunarungu" class="w-full p-3 rounded-xl border border-blue-300 font-bold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-sm text-blue-900 mb-1">Tanggal Praktik:</label>
+                        <input type="date" id="lkpd-tanggal" class="w-full p-3 rounded-xl border border-blue-300 font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <!-- Worksheet Task Cards -->
+                <div class="space-y-6">
+                    <div class="border-2 border-slate-200 p-5 rounded-2xl">
+                        <h3 class="font-bold text-lg text-blue-900 mb-2">A. Pengenalan Bahan & Alat</h3>
+                        <p class="text-sm text-slate-600 mb-3">Tuliskan 3 bahan utama dan 3 alat utama yang kamu gunakan hari ini!</p>
+                        <textarea id="lkpd-bahan-alat" rows="3" placeholder="Contoh: Bahan = Pisang, Tepung, Minyak. Alat = Wajan, Pisau, Sendok." class="w-full p-3 border rounded-xl font-medium"></textarea>
+                    </div>
+
+                    <div class="border-2 border-slate-200 p-5 rounded-2xl">
+                        <h3 class="font-bold text-lg text-blue-900 mb-2">B. Refleksi Perasaan Saya Hari Ini</h3>
+                        <p class="text-sm text-slate-600 mb-3">Pilihlah gambar emoji yang menggambarkan perasaanmu setelah belajar membuat pisang goreng:</p>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2 bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-300 cursor-pointer hover:bg-emerald-100 flex-1 justify-center">
+                                <input type="radio" name="refleksi" value="Senang" class="w-5 h-5 text-emerald-600">
+                                <span class="text-3xl">😊</span>
+                                <span class="font-bold text-emerald-900">Saya Senang Memasak</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-yellow-50 p-4 rounded-2xl border-2 border-yellow-300 cursor-pointer hover:bg-yellow-100 flex-1 justify-center">
+                                <input type="radio" name="refleksi" value="Perlu Bantuan" class="w-5 h-5 text-yellow-600">
+                                <span class="text-3xl">🙂</span>
+                                <span class="font-bold text-yellow-900">Perlu Bantuan Guru</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-slate-50 p-4 rounded-2xl border-2 border-slate-300 cursor-pointer hover:bg-slate-100 flex-1 justify-center">
+                                <input type="radio" name="refleksi" value="Masih Belajar" class="w-5 h-5 text-slate-600">
+                                <span class="text-3xl">😐</span>
+                                <span class="font-bold text-slate-900">Masih Belajar</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end gap-3">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow">
+                        🖨️ Cetak LKPD Ini
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. RUBRIK PENILAIAN GURU -->
+        <section id="sec-penilaian" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-slate-400">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">📊</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">RUBRIK PENILAIAN GURU SLB</h2>
+                        <p class="text-slate-500 text-sm">Pedoman Penilaian Kinerja Praktik Tata Boga Siswa Tunarungu</p>
+                    </div>
+                </div>
+
+                <!-- Rubric Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold text-sm">
+                                <th class="p-3 border">ASPEK PENILAIAN</th>
+                                <th class="p-3 border text-center">SKOR 4 (Sangat Baik)</th>
+                                <th class="p-3 border text-center">SKOR 3 (Baik)</th>
+                                <th class="p-3 border text-center">SKOR 2 (Cukup)</th>
+                                <th class="p-3 border text-center">SKOR 1 (Bimbingan)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium text-slate-700">
+                            <tr class="bg-slate-50">
+                                <td class="p-3 border font-bold text-slate-900">1. Mengenal Bahan & Alat</td>
+                                <td class="p-3 border">Menunjukkan semua bahan & alat mandiri.</td>
+                                <td class="p-3 border">Menunjukkan bahan & alat dengan sedikit bantuan.</td>
+                                <td class="p-3 border">Perlu diingatkan fungsi alat & bahan.</td>
+                                <td class="p-3 border">Perlu bimbingan penuh dari guru.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border font-bold text-slate-900">2. Proses Pembuatan Adonan</td>
+                                <td class="p-3 border">Mengaduk adonan pas & tidak menggumpal.</td>
+                                <td class="p-3 border">Mengaduk adonan dengan baik.</td>
+                                <td class="p-3 border">Takaran air/terigu kurang pas.</td>
+                                <td class="p-3 border">Dibantu guru saat membuat adonan.</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 border font-bold text-slate-900">3. Keselamatan & Menggoreng</td>
+                                <td class="p-3 border">Hati-hati dengan wajan/kompor panas.</td>
+                                <td class="p-3 border">Menggoreng aman dengan pengawasan.</td>
+                                <td class="p-3 border">Ragu-ragu menyentuh spatula/wajan.</td>
+                                <td class="p-3 border">Takut kompor/minyak panas.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border font-bold text-slate-900">4. Sikap Kebersihan (K3)</td>
+                                <td class="p-3 border">Cuci tangan & meja sangat bersih.</td>
+                                <td class="p-3 border">Membersihkan meja setelah diingatkan.</td>
+                                <td class="p-3 border">Meja masih agak basah/kotor.</td>
+                                <td class="p-3 border">Tidak mau membersihkan meja/alat.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. PENGATURAN LINK GURU (CONFIG) -->
+        <section id="sec-pengaturan" class="tab-content hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-amber-500">
+                <div class="flex items-center gap-3 mb-6 border-b-2 border-slate-100 pb-4">
+                    <span class="text-4xl">⚙️</span>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-black text-amber-900">PENGATURAN LINK GURU</h2>
+                        <p class="text-slate-500 text-sm">Kelola URL tautan Google Docs dan File Word LKPD di sini</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 max-w-2xl">
+                    <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200 space-y-4">
+                        <div>
+                            <label class="block font-bold text-sm text-amber-900 mb-1">Tautan Google Docs LKPD:</label>
+                            <input type="text" id="input-docs-url" placeholder="https://docs.google.com/document/d/..." class="w-full p-3 rounded-xl border border-amber-300 font-mono text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-sm text-amber-900 mb-1">Tautan File Word / OneDrive LKPD:</label>
+                            <input type="text" id="input-word-url" placeholder="https://onedrive.live.com/..." class="w-full p-3 rounded-xl border border-amber-300 font-mono text-sm">
+                        </div>
+
+                        <button onclick="saveLinkConfiguration()" class="btn-large bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-xl font-bold shadow">
+                            💾 Simpan Perubahan Link
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-100 p-4 rounded-2xl text-xs text-slate-600 space-y-1">
+                        <p class="font-bold text-slate-800 text-sm">💡 Informasi Variabel JavaScript (script.js):</p>
+                        <p>Secara bawaan, konfigurasi ini tersimpan dalam memori browser (`localStorage`). Guru juga dapat menyunting variabel langsung di dalam berkas JavaScript:</p>
+                        <p class="font-mono bg-white p-2 rounded border my-2">
+                            let GOOGLE_DOCS_URL = "MASUKKAN_LINK_GOOGLE_DOCS_DI_SINI";<br>
+                            let WORD_FILE_URL = "MASUKKAN_LINK_FILE_WORD_DI_SINI";
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 py-6 text-center text-sm font-semibold border-t-4 border-amber-500 mt-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="mb-1">Media Pembelajaran Interaktif Tata Boga SMALB Fase E • Khusus Tunarungu</p>
+            <p class="text-xs text-slate-400">Dirancang Visual, Konkret, Ramah Anak Berkebutuhan Khusus & Responsif All Devices.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           CONFIGURABLE VARIABLES FOR TEACHERS (DAPAT DIGANTI GURU)
+           ========================================================================== */
+        let GOOGLE_DOCS_URL = localStorage.getItem('cfg_docs_url') || "https://docs.google.com";
+        let WORD_FILE_URL = localStorage.getItem('cfg_word_url') || "https://microsoft.com";
+        let YOUTUBE_VIDEO_URL = localStorage.getItem('cfg_yt_url') || "https://www.youtube.com/embed/dQw4w9WgXcQ";
+
+        // Global User Score
+        let totalScore = parseInt(localStorage.getItem('tb_user_score')) || 0;
+
+        /* ==========================================================================
+           DATA 1: INGREDIENTS (BAHAN-BAHAN)
+           ========================================================================== */
+        const INGREDIENTS_DATA = [
+            {
+                id: 'pisa',
+                name: 'PISANG',
+                icon: '🍌',
+                desc: 'Buah manis yang dijadikan bahan utama hidangan pisang goreng.',
+                safety: 'Pilih pisang raja atau pisang kepok yang sudah matang.'
+            },
+            {
+                id: 'terigu',
+                name: 'TEPUNG TERIGU',
+                icon: '🌾',
+                desc: 'Tepung halus yang digunakan untuk membuat balutan adonan renyah.',
+                safety: 'Ayak tepung agar tidak ada kotoran atau gumpalan.'
+            },
+            {
+                id: 'air',
+                name: 'AIR BERSIH',
+                icon: '💧',
+                desc: 'Cairan matang untuk mencampur tepung menjadi adonan pas.',
+                safety: 'Gunakan air bersih kran dapur atau air matang.'
+            },
+            {
+                id: 'gula',
+                name: 'GULA PASIR',
+                icon: '🍬',
+                desc: 'Pemanis alami agar rasa adonan tepung menjadi lezat.',
+                safety: 'Gunakan secukupnya sesuai resep.'
+            },
+            {
+                id: 'garam',
+                name: 'GARAM DAPER',
+                icon: '🧂',
+                desc: 'Memberi rasa gurih yang pas pada adonan gorengan.',
+                safety: 'Tambahkan sedikit saja (seujung sendok).'
+            },
+            {
+                id: 'minyak',
+                name: 'MINYAK GORENG',
+                icon: '🛢️',
+                desc: 'Minyak kelapa sawit untuk mematangkan gorengan di wajan.',
+                safety: 'Hati-hati! Minyak panas tidak boleh tersentuh tangan.'
+            }
+        ];
+
+        /* ==========================================================================
+           DATA 2: TOOLS (ALAT-ALAT DAPUR)
+           ========================================================================== */
+        const TOOLS_DATA = [
+            {
+                id: 'mangkuk',
+                name: 'MANGKUK',
+                icon: '🥣',
+                func: 'Wadah tempat mencampur tepung, air, gula, dan garam.',
+                safe: 'Letakkan mangkuk di atas meja yang rata agar tidak tumpah.'
+            },
+            {
+                id: 'sendok',
+                name: 'SENDOK',
+                icon: '🥄',
+                func: 'Alat untuk mengaduk adonan dan mengambil tepung.',
+                safe: 'Pegang gagang sendok dengan erat saat mengaduk.'
+            },
+            {
+                id: 'pisau',
+                name: 'PISAU DAPUR',
+                icon: '🔪',
+                func: 'Alat untuk mengupas dan memotong buah pisang.',
+                safe: 'Awas tajam! Arahkan mata pisau menjauhi jari tangan.'
+            },
+            {
+                id: 'wajan',
+                name: 'WAJAN GORENG',
+                icon: '🍳',
+                func: 'Wadah tempat menampung minyak panas untuk menggoreng.',
+                safe: 'Jangan menyentuh badan wajan saat kompor menyala.'
+            },
+            {
+                id: 'kompor',
+                name: 'KOMPOR DAPUR',
+                icon: '🔥',
+                func: 'Sumber panas untuk memasak dan mematangkan adonan.',
+                safe: 'Minta bimbingan Guru saat menyalakan kompor gas!'
+            },
+            {
+                id: 'spatula',
+                name: 'SPATULA / SUTIL',
+                icon: '🍴',
+                func: 'Alat untuk membalik pisang goreng di wajan.',
+                safe: 'Gunakan sutil berpegangan kayu/plastik aman panas.'
+            },
+            {
+                id: 'piring',
+                name: 'PIRING SAJI',
+                icon: '🍽️',
+                func: 'Wadah bersih untuk menyajikan pisang goreng matang.',
+                safe: 'Pegang piring dengan dua tangan agar tidak jatuh.'
+            }
+        ];
+
+        /* ==========================================================================
+           DATA 3: STEPS (LANGKAH-LANGKAH PEMBUATAN)
+           ========================================================================== */
+        const STEPS_DATA = [
+            { num: 1, icon: '🍌', text: 'Kupas dan potong pisang segar.', safe: 'Gunakan pisau dengan teliti dan hati-hati.' },
+            { num: 2, icon: '🥣', text: 'Masukkan tepung terigu ke dalam mangkuk.', safe: 'Gunakan sendok bersih saat mengambil tepung.' },
+            { num: 3, icon: '💧', text: 'Tambahkan air bersih sedikit demi sedikit.', safe: 'Jangan meletakkan gelas air terlalu dekat tepi meja.' },
+            { num: 4, icon: '🥄', text: 'Tambahkan gula pasir dan sedikit garam.', safe: 'Takut kemanisan? Ikuti petunjuk resep guru.' },
+            { num: 5, icon: '🥣', text: 'Aduk rata sampai adonan licin dan tidak gumpal.', safe: 'Pegang wadah mangkuk dengan tangan kiri.' },
+            { num: 6, icon: '🍌', text: 'Masukkan potongan pisang ke dalam adonan tepung.', safe: 'Pastikan pisang terbalut adonan secara merata.' },
+            { num: 7, icon: '🔥', text: 'Panaskan minyak goreng di atas kompor.', safe: 'GURU AKAN MEMBANTU menyalakan kompor gas.' },
+            { num: 8, icon: '🍳', text: 'Goreng pisang dengan hati-hati sampai kuning keemasan.', safe: 'Jangan terlalu dekat dengan percikan minyak panas!' },
+            { num: 9, icon: '🍽️', text: 'Angkat pisang goreng lalu tiriskan minyaknya.', safe: 'Gunakan spatula dan peniris gorengan.' },
+            { num: 10, icon: '😋', text: 'Sajikan pisang goreng hangat di atas piring!', safe: 'Selamat! Jangan lupa bersihkan tempat kerja.' }
+        ];
+
+        /* ==========================================================================
+           DATA 4: QUIZ QUESTIONS (10 SOAL LATIHAN)
+           ========================================================================== */
+        const QUIZ_QUESTIONS = [
+            {
+                q: '1. Bahan utama untuk membuat pisang goreng adalah...',
+                options: ['A. Pisang', 'B. Beras', 'C. Kacang'],
+                correct: 0,
+                emoji: '🍌',
+                exp: 'Benar! Pisang adalah bahan utama hidangan ini.'
+            },
+            {
+                q: '2. Alat dapur yang digunakan untuk menggoreng adalah...',
+                options: ['A. Wajan', 'B. Piring', 'C. Mangkuk'],
+                correct: 0,
+                emoji: '🍳',
+                exp: 'Benar! Wajan digunakan menampung minyak goreng.'
+            },
+            {
+                q: '3. Sebelum mulai memasak di dapur, kita harus...',
+                options: ['A. Mencuci tangan', 'B. Bermain-main', 'C. Tidur'],
+                correct: 0,
+                emoji: '🧼',
+                exp: 'Benar! Mencuci tangan menjaga kebersihan makanan.'
+            },
+            {
+                q: '4. Tepung terigu dicampur air berguna untuk membuat...',
+                options: ['A. Adonan', 'B. Minyak', 'C. Sirup'],
+                correct: 0,
+                emoji: '🥣',
+                exp: 'Benar! Tepung dan air membentuk adonan gorengan.'
+            },
+            {
+                q: '5. Alat yang digunakan untuk mengaduk adonan tepung adalah...',
+                options: ['A. Sendok', 'B. Pisau', 'C. Piring'],
+                correct: 0,
+                emoji: '🥄',
+                exp: 'Benar! Sendok dipakai untuk mengaduk adonan.'
+            },
+            {
+                q: '6. Kita memotong buah pisang menggunakan alat...',
+                options: ['A. Pisau Dapur', 'B. Spatula', 'C. Piring'],
+                correct: 0,
+                emoji: '🔪',
+                exp: 'Benar! Pisau digunakan memotong pisang.'
+            },
+            {
+                q: '7. Minyak goreng di atas kompor rasanya panas, jadi kita harus...',
+                options: ['A. Hati-hati', 'B. Menyentuhnya', 'C. Menyiram air'],
+                correct: 0,
+                emoji: '🔥',
+                exp: 'Benar! Hati-hati dengan minyak panas agar tidak terluka.'
+            },
+            {
+                q: '8. Pisang goreng yang sudah matang disajikan di atas...',
+                options: ['A. Piring Saji', 'B. Mangkuk Air', 'C. Wajan Panas'],
+                correct: 0,
+                emoji: '🍽️',
+                exp: 'Benar! Piring saji untuk menghidangkan pisang.'
+            },
+            {
+                q: '9. Setelah selesai memasak, meja dapur harus...',
+                options: ['A. Dibersihkan', 'B. Dibiarkan Kotor', 'C. Dicoret-coret'],
+                correct: 0,
+                emoji: '🧹',
+                exp: 'Benar! Selalu bersihkan meja dapur setelah praktik.'
+            },
+            {
+                q: '10. Saat menyalakan kompor gas, siswa harus didampingi oleh...',
+                options: ['A. Guru / Orang Dewasa', 'B. Teman Sendiri', 'C. Tanpa Siapa-siapa'],
+                correct: 0,
+                emoji: '🧏‍♂️',
+                exp: 'Benar! Guru akan mendampingi demi keselamatan!'
+            }
+        ];
+
+        /* ==========================================================================
+           TAB NAVIGATION LOGIC
+           ========================================================================== */
+        function switchTab(tabId) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.add('hidden'));
+
+            // Deactivate all nav link styling
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(l => l.classList.remove('active'));
+
+            // Show selected content
+            const targetContent = document.getElementById('sec-' + tabId);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            // Highlight selected nav button
+            const targetLink = document.getElementById('tab-' + tabId);
+            if (targetLink) targetLink.classList.add('active');
+
+            // Scroll window to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ==========================================================================
+           1. INGREDIENT RENDERING
+           ========================================================================== */
+        function renderIngredients() {
+            const container = document.getElementById('container-bahan');
+            if (!container) return;
+            container.innerHTML = '';
+
+            INGREDIENTS_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-interactive bg-amber-50/50 rounded-3xl p-5 border-2 border-amber-200 flex flex-col justify-between text-center shadow-sm';
+                card.innerHTML = `
+                    <div>
+                        <div class="text-7xl mb-3 animate-bounce-subtle">${item.icon}</div>
+                        <h3 class="font-black text-xl text-amber-900 mb-2">${item.name}</h3>
+                        <p class="text-sm text-slate-700 font-semibold mb-4">${item.desc}</p>
+                    </div>
+                    <div>
+                        <button onclick="toggleCardDetail('${item.id}')" class="btn-large w-full bg-amber-500 hover:bg-amber-600 text-white rounded-xl py-2.5 font-bold text-sm transition">
+                            👆 KLIK UNTUK INFO
+                        </button>
+                        <div id="detail-${item.id}" class="hidden mt-3 p-3 bg-amber-100 rounded-xl text-xs font-bold text-amber-900 border border-amber-300">
+                            💡 Catatan: ${item.safety}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleCardDetail(id) {
+            const el = document.getElementById('detail-' + id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        /* ==========================================================================
+           2. TOOLS RENDERING
+           ========================================================================== */
+        function renderTools() {
+            const container = document.getElementById('container-alat');
+            if (!container) return;
+            container.innerHTML = '';
+
+            TOOLS_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-interactive bg-cyan-50/50 rounded-3xl p-5 border-2 border-cyan-200 flex flex-col justify-between text-center shadow-sm';
+                card.innerHTML = `
+                    <div>
+                        <div class="text-7xl mb-3">${item.icon}</div>
+                        <h3 class="font-black text-xl text-cyan-900 mb-2">${item.name}</h3>
+                        <p class="text-sm text-slate-700 font-semibold mb-4">${item.func}</p>
+                    </div>
+                    <div>
+                        <button onclick="toggleCardDetail('${item.id}')" class="btn-large w-full bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl py-2.5 font-bold text-sm transition">
+                            🛡️ CARA AMAN
+                        </button>
+                        <div id="detail-${item.id}" class="hidden mt-3 p-3 bg-cyan-100 rounded-xl text-xs font-bold text-cyan-900 border border-cyan-300">
+                            🔒 Awan: ${item.safe}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        /* ==========================================================================
+           3. STEP BY STEP CAROUSEL
+           ========================================================================== */
+        let currentStepIndex = 0;
+
+        function updateStepUI() {
+            const step = STEPS_DATA[currentStepIndex];
+            document.getElementById('step-indicator').innerText = `Langkah ${step.num} dari ${STEPS_DATA.length}`;
+            document.getElementById('step-badge').innerText = `LANGKAH ${step.num}`;
+            document.getElementById('step-icon').innerText = step.icon;
+            document.getElementById('step-text').innerText = step.text;
+            document.getElementById('step-safety-note').innerText = step.safe;
+
+            // Enable / disable buttons
+            document.getElementById('btn-prev-step').disabled = (currentStepIndex === 0);
+            const nextBtn = document.getElementById('btn-next-step');
+            if (currentStepIndex === STEPS_DATA.length - 1) {
+                nextBtn.innerText = 'Selesai Belajar 🎉';
+                nextBtn.onclick = () => switchTab('video');
+            } else {
+                nextBtn.innerText = 'Langkah Berikutnya ➡️';
+                nextBtn.onclick = nextStep;
+            }
+        }
+
+        function nextStep() {
+            if (currentStepIndex < STEPS_DATA.length - 1) {
+                currentStepIndex++;
+                updateStepUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStepIndex > 0) {
+                currentStepIndex--;
+                updateStepUI();
+            }
+        }
+
+        /* ==========================================================================
+           4. MATCHING GAME (AYO PASANGKAN)
+           ========================================================================== */
+        let selectedMatchLeft = null;
+        let matchedPairsCount = 0;
+
+        const MATCH_DATA = [
+            { id: 1, leftIcon: '🍌', leftTitle: 'Pisang', rightText: 'Bahan Utama Memasak' },
+            { id: 2, leftIcon: '🌾', leftTitle: 'Tepung Terigu', rightText: 'Bahan Membuat Adonan' },
+            { id: 3, leftIcon: '🍳', leftTitle: 'Wajan', rightText: 'Alat Tempat Menggoreng' },
+            { id: 4, leftIcon: '🔪', leftTitle: 'Pisau', rightText: 'Alat Memotong Pisang' }
+        ];
+
+        function initMatchGame() {
+            const leftCol = document.getElementById('match-left');
+            const rightCol = document.getElementById('match-right');
+            if (!leftCol || !rightCol) return;
+
+            leftCol.innerHTML = '<h3 class="font-bold text-lg text-indigo-900 mb-2 border-b pb-1">1. Pilih Gambar Item:</h3>';
+            rightCol.innerHTML = '<h3 class="font-bold text-lg text-indigo-900 mb-2 border-b pb-1">2. Pilih Pasangan Cocok:</h3>';
+
+            // Shuffle right definitions for game challenge
+            const shuffledRight = [...MATCH_DATA].sort(() => Math.random() - 0.5);
+
+            MATCH_DATA.forEach(item => {
+                const btnLeft = document.createElement('button');
+                btnLeft.id = `match-left-${item.id}`;
+                btnLeft.className = 'w-full text-left p-4 rounded-2xl border-2 border-indigo-200 bg-indigo-50 font-bold flex items-center gap-3 transition hover:border-indigo-500';
+                btnLeft.innerHTML = `<span class="text-3xl">${item.leftIcon}</span> <span>${item.leftTitle}</span>`;
+                btnLeft.onclick = () => selectMatchLeftItem(item.id);
+                leftCol.appendChild(btnLeft);
+            });
+
+            shuffledRight.forEach(item => {
+                const btnRight = document.createElement('button');
+                btnRight.id = `match-right-${item.id}`;
+                btnRight.className = 'w-full text-left p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 font-bold text-sm text-slate-800 transition hover:border-indigo-500';
+                btnRight.innerText = item.rightText;
+                btnRight.onclick = () => selectMatchRightItem(item.id);
+                rightCol.appendChild(btnRight);
+            });
+        }
+
+        function selectMatchLeftItem(id) {
+            // Reset previous highlights
+            MATCH_DATA.forEach(item => {
+                const el = document.getElementById(`match-left-${item.id}`);
+                if (el && !el.disabled) el.classList.remove('border-indigo-600', 'bg-indigo-200', 'ring-4');
+            });
+
+            selectedMatchLeft = id;
+            const target = document.getElementById(`match-left-${id}`);
+            if (target) target.classList.add('border-indigo-600', 'bg-indigo-200', 'ring-4');
+        }
+
+        function selectMatchRightItem(id) {
+            const feedback = document.getElementById('match-game-feedback');
+            if (!selectedMatchLeft) {
+                feedback.className = 'mt-6 p-4 rounded-2xl text-center font-bold text-lg bg-amber-100 text-amber-900 block';
+                feedback.innerText = '⚠️ Klik gambar di sebelah kiri terlebih dahulu!';
+                return;
+            }
+
+            if (selectedMatchLeft === id) {
+                // Correct match
+                document.getElementById(`match-left-${id}`).disabled = true;
+                document.getElementById(`match-left-${id}`).classList.add('opacity-40', 'bg-emerald-200');
+                document.getElementById(`match-right-${id}`).disabled = true;
+                document.getElementById(`match-right-${id}`).classList.add('opacity-40', 'bg-emerald-200');
+
+                addScore(20);
+                matchedPairsCount++;
+                selectedMatchLeft = null;
+
+                feedback.className = 'mt-6 p-4 rounded-2xl text-center font-bold text-lg bg-emerald-100 text-emerald-900 block';
+                feedback.innerText = '🎉 HEBAT! PASANGAN BENAR (+20 SKOR)';
+
+                if (matchedPairsCount === MATCH_DATA.length) {
+                    feedback.innerText = '🏆 LUAR BIASA! KAMU SUDAH MEMASANGKAN SEMUA DENGAN BENAR!';
+                }
+            } else {
+                feedback.className = 'mt-6 p-4 rounded-2xl text-center font-bold text-lg bg-rose-100 text-rose-900 block';
+                feedback.innerText = '❌ MASIH KURANG TEPAT. COBA PERHATIKAN GAMBAR LAGI!';
+            }
+        }
+
+        function resetMatchGame() {
+            selectedMatchLeft = null;
+            matchedPairsCount = 0;
+            const feedback = document.getElementById('match-game-feedback');
+            if (feedback) feedback.classList.add('hidden');
+            initMatchGame();
+        }
+
+        /* ==========================================================================
+           5. ORDERING GAME (MENGURUTKAN LANGKAH)
+           ========================================================================== */
+        const CORRECT_ORDER = [
+            '1. Siapkan bahan pisang & tepung',
+            '2. Buat adonan tepung & air',
+            '3. Masukkan pisang ke adonan',
+            '4. Panaskan minyak di wajan',
+            '5. Goreng pisang hingga matang',
+            '6. Tiriskan pisang goreng',
+            '7. Sajikan di piring'
+        ];
+
+        let userStepOrder = [];
+
+        function initOrderGame() {
+            userStepOrder = [];
+            const poolContainer = document.getElementById('order-pool');
+            const userList = document.getElementById('order-user-list');
+            const feedback = document.getElementById('order-feedback');
+            if (!poolContainer || !userList) return;
+
+            poolContainer.innerHTML = '';
+            userList.innerHTML = '<li class="text-slate-400 italic font-normal">Belum ada langkah dipilih...</li>';
+            if (feedback) feedback.innerText = '';
+
+            // Shuffle steps
+            const shuffled = [...CORRECT_ORDER].sort(() => Math.random() - 0.5);
+
+            shuffled.forEach((stepText, idx) => {
+                const chip = document.createElement('button');
+                chip.className = 'bg-purple-100 hover:bg-purple-200 text-purple-900 p-3 rounded-xl font-bold text-sm border border-purple-300 shadow-sm transition';
+                chip.innerText = stepText;
+                chip.onclick = () => selectOrderStep(stepText, chip);
+                poolContainer.appendChild(chip);
+            });
+        }
+
+        function selectOrderStep(text, btnElement) {
+            userStepOrder.push(text);
+            btnElement.disabled = true;
+            btnElement.classList.add('opacity-30');
+
+            const userList = document.getElementById('order-user-list');
+            if (userStepOrder.length === 1) userList.innerHTML = '';
+
+            const li = document.createElement('li');
+            li.className = 'bg-white p-2.5 rounded-xl border border-purple-200 shadow-sm';
+            li.innerText = text;
+            userList.appendChild(li);
+        }
+
+        function checkStepOrdering() {
+            const feedback = document.getElementById('order-feedback');
+            if (userStepOrder.length < CORRECT_ORDER.length) {
+                feedback.className = 'font-bold text-amber-700 bg-amber-100 p-2 rounded-xl text-sm';
+                feedback.innerText = '⚠️ Pilih semua langkah terlebih dahulu!';
+                return;
+            }
+
+            let isCorrect = true;
+            for (let i = 0; i < CORRECT_ORDER.length; i++) {
+                if (userStepOrder[i] !== CORRECT_ORDER[i]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                addScore(30);
+                feedback.className = 'font-bold text-emerald-800 bg-emerald-100 p-3 rounded-xl text-base';
+                feedback.innerText = '🎉 BENAR SEKALI! URUTAN MEMASAK KAMU TEPAT! (+30 SKOR)';
+            } else {
+                feedback.className = 'font-bold text-rose-800 bg-rose-100 p-3 rounded-xl text-base';
+                feedback.innerText = '❌ URUTAN MASIH SALAH. KLIK "ULANGI GAME" UNTUK MENCOBA LAGI!';
+            }
+        }
+
+        function resetOrderGame() {
+            initOrderGame();
+        }
+
+        /* ==========================================================================
+           6. QUIZ LOGIC (LATIHAN SOAL 10 NOMOR)
+           ========================================================================== */
+        let currentQuizIndex = 0;
+        let quizAnswers = new Array(QUIZ_QUESTIONS.length).fill(null);
+
+        function renderQuizQuestion() {
+            const qData = QUIZ_QUESTIONS[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `Soal ${currentQuizIndex + 1} dari ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('quiz-emoji').innerText = qData.emoji;
+            document.getElementById('quiz-question-text').innerText = qData.q;
+
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = '';
+
+            qData.options.forEach((optText, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-slate-200 bg-white font-bold text-lg text-slate-800 hover:border-orange-400 transition flex items-center justify-between';
+
+                if (quizAnswers[currentQuizIndex] !== null) {
+                    btn.disabled = true;
+                    if (optIdx === qData.correct) {
+                        btn.classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-900');
+                    } else if (quizAnswers[currentQuizIndex] === optIdx) {
+                        btn.classList.add('border-rose-500', 'bg-rose-100', 'text-rose-900');
+                    }
+                }
+
+                btn.innerText = optText;
+                btn.onclick = () => answerQuizQuestion(optIdx);
+                container.appendChild(btn);
+            });
+
+            // Explanation box
+            const expBox = document.getElementById('quiz-explanation');
+            if (quizAnswers[currentQuizIndex] !== null) {
+                expBox.classList.remove('hidden');
+                if (quizAnswers[currentQuizIndex] === qData.correct) {
+                    expBox.className = 'p-4 rounded-2xl font-bold text-base bg-emerald-100 text-emerald-900 border border-emerald-300';
+                    expBox.innerText = '✅ BENAR! ' + qData.exp;
+                } else {
+                    expBox.className = 'p-4 rounded-2xl font-bold text-base bg-rose-100 text-rose-900 border border-rose-300';
+                    expBox.innerText = '❌ JAWABAN KURANG TEPAT. JAWABAN BENAR: ' + qData.options[qData.correct];
+                }
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Prev button state
+            document.getElementById('btn-quiz-prev').disabled = (currentQuizIndex === 0);
+        }
+
+        function answerQuizQuestion(optIdx) {
+            if (quizAnswers[currentQuizIndex] !== null) return; // already answered
+            quizAnswers[currentQuizIndex] = optIdx;
+
+            if (optIdx === QUIZ_QUESTIONS[currentQuizIndex].correct) {
+                addScore(10);
+            }
+            renderQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizIndex < QUIZ_QUESTIONS.length - 1) {
+                currentQuizIndex++;
+                renderQuizQuestion();
+            } else {
+                alert(`🏆 Selesai! Kamu telah menyelesaikan semua latihan soal. Skor total kamu: ${totalScore}`);
+            }
+        }
+
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                renderQuizQuestion();
+            }
+        }
+
+        /* ==========================================================================
+           7. GLOBAL SCORE & STORAGE SYSTEM
+           ========================================================================== */
+        function addScore(pts) {
+            totalScore += pts;
+            localStorage.setItem('tb_user_score', totalScore);
+            document.getElementById('global-score').innerText = totalScore;
+        }
+
+        /* ==========================================================================
+           8. DYNAMIC EXTERNAL LINKS (GOOGLE DOCS & WORD)
+           ========================================================================== */
+        function openGoogleDocs() {
+            if (GOOGLE_DOCS_URL.includes("MASUKKAN_LINK")) {
+                alert("⚠️ Guru belum memasukkan URL Google Docs di menu Pengaturan!");
+            } else {
+                window.open(GOOGLE_DOCS_URL, '_blank');
+            }
+        }
+
+        function openWordFile() {
+            if (WORD_FILE_URL.includes("MASUKKAN_LINK")) {
+                alert("⚠️ Guru belum memasukkan URL File Word di menu Pengaturan!");
+            } else {
+                window.open(WORD_FILE_URL, '_blank');
+            }
+        }
+
+        function saveLinkConfiguration() {
+            const docsVal = document.getElementById('input-docs-url').value.trim();
+            const wordVal = document.getElementById('input-word-url').value.trim();
+
+            if (docsVal) {
+                GOOGLE_DOCS_URL = docsVal;
+                localStorage.setItem('cfg_docs_url', docsVal);
+            }
+            if (wordVal) {
+                WORD_FILE_URL = wordVal;
+                localStorage.setItem('cfg_word_url', wordVal);
+            }
+
+            alert("✅ Konfigurasi Tautan Berhasil Disimpan!");
+        }
+
+        function updateYouTubeUrl() {
+            const val = document.getElementById('input-yt-url').value.trim();
+            if (!val) return;
+
+            let embedUrl = val;
+            if (val.includes("watch?v=")) {
+                embedUrl = val.replace("watch?v=", "embed/");
+            }
+
+            YOUTUBE_VIDEO_URL = embedUrl;
+            localStorage.setItem('cfg_yt_url', embedUrl);
+
+            const iframe = document.getElementById('youtube-iframe');
+            if (iframe) iframe.src = embedUrl;
+
+            alert("✅ URL Video YouTube Berhasil Diperbarui!");
+        }
+
+        /* ==========================================================================
+           INITIALIZATION ON WINDOW LOAD
+           ========================================================================== */
+        window.onload = function() {
+            // Load saved score
+            document.getElementById('global-score').innerText = totalScore;
+
+            // Load saved settings
+            document.getElementById('input-docs-url').value = GOOGLE_DOCS_URL;
+            document.getElementById('input-word-url').value = WORD_FILE_URL;
+            document.getElementById('input-yt-url').value = YOUTUBE_VIDEO_URL;
+
+            // Render Modules
+            renderIngredients();
+            renderTools();
+            updateStepUI();
+            initMatchGame();
+            initOrderGame();
+            renderQuizQuestion();
+
+            // Set current date in LKPD
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('lkpd-tanggal');
+            if (dateInput) dateInput.value = today;
+        };
+    </script>
+</body>
+</html>
